@@ -2,6 +2,8 @@ from sportsipy.nfl.boxscore import Boxscores, Boxscore
 import pandas as pd
 import numpy as np
 
+print("Hello")
+
 def game_data(game_df,game_stats):
     try:
         away_team_df = game_df[['away_name', 'away_abbr', 'away_score']].rename(columns = {'away_name': 'team_name', 'away_abbr': 'team_abbr', 'away_score': 'score'})
@@ -290,6 +292,8 @@ import xgboost as xgb
 
 dtest = xgb.DMatrix(X_test, y_test, feature_names=X_test.columns)
 dtrain = xgb.DMatrix(X_train, y_train,feature_names=X_train.columns)
+
+
 
 param = {'verbosity':1, 
          'objective':'binary:hinge',
