@@ -2,8 +2,6 @@ from sportsipy.nfl.boxscore import Boxscores, Boxscore
 import pandas as pd
 import numpy as np
 
-print("Hello")
-
 def game_data(game_df,game_stats):
     try:
         away_team_df = game_df[['away_name', 'away_abbr', 'away_score']].rename(columns = {'away_name': 'team_name', 'away_abbr': 'team_abbr', 'away_score': 'score'})
@@ -202,7 +200,7 @@ def agg_weekly_data(schedule_df,weeks_games_df,current_week,weeks):
     return agg_games_df
 
 def get_elo():
-    elo_df = pd.read_csv(r"C:\Users\Tajae\Desktop\nfl_elo_latest.csv")
+    elo_df = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\nfl_elo_latest.csv")
     elo_df = elo_df.drop(columns = ['season','neutral' ,'playoff', 'elo_prob1', 'elo_prob2', 'elo1_post', 'elo2_post',
            'qbelo1_pre', 'qbelo2_pre', 'qb1', 'qb2', 'qb1_adj', 'qb2_adj', 'qbelo_prob1', 'qbelo_prob2',
            'qb1_game_value', 'qb2_game_value', 'qb1_value_post', 'qb2_value_post',
