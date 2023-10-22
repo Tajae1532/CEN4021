@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 
 pd.set_option('display.max_columns', None)
 
-#Cairo commit
+#Cairo commits
 
 # Define a date range
 start_date = '2022-09-08'
