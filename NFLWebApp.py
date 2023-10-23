@@ -337,9 +337,13 @@ elif menu_selection == "Prediction Bot":
     with st.container():
         with open('styles.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-        # Let user select the prediction method
-        method = st.radio("Select a prediction method", ["Logistic Regression", "Neural Network", "Random Forest"])
 
+        spacingColumn, radioColumn, sliderColumn, secondspacingColumn = st.columns((1, 5, 5, 1))
+        # Let user select the prediction method
+        with radioColumn:
+            method = st.radio("Select a prediction method", ["Logistic Regression", "Neural Network", "Random Forest"])
+        with sliderColumn:
+            st.slider("Select week for prediction", 1, 14, 7)
     # Load and preprocess data
     df, X_test, test_df, pred_week = prepare_data()
 
