@@ -68,17 +68,8 @@ if menu_selection == "Home":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
     dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=headers, params=todaysGameQuery)
-    st.write(dailyScoreboardResponse.json())
 
-    for i in dailyScoreboardResponse.json["body"]:
-        with st.container():
-            text_container = st.container()
-            with text_container:
-                st.subheader(i["home"] + "VS" + i["away"])
-                st.write("Time: " + i["gameTime"])
-                st.write("SCORE: ")
-                st.write(i["home"] + ": " + i["homePts"])
-                st.write(i["away"] + ": " + i["awayPts"])
+
 
 elif menu_selection == "News":
     st.write("Under Construction")
