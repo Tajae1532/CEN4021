@@ -134,8 +134,6 @@ def display_results(y_pred, test_df):
                     st.image(teamLogo(away_team), use_column_width="auto")
 
 
-
-
 # FUNCTIONS
 # Returns Team Logo
 def teamLogo(team):
