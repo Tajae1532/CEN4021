@@ -1,8 +1,6 @@
 div[data-testid="stVerticalBlock"] div[style*="flex-direction: column;"] div[data-testid="stVerticalBlock"]{
-    background-color: #262730;
+    background-color: 	rgba(38, 39, 48, 0.5);
     text-align: center;
-    padding-right: 2rem;
-    padding-left: 2rem;
     border-radius: 2rem;
 
 }
