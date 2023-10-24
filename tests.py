@@ -22,7 +22,7 @@ pd.set_option('display.max_columns', None)
 
 
 def prepare_data(pred_week):
-    df = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\2021_week_2_through_14.csv")
+    df = pd.read_csv(r"2021_week_2_through_14.csv")
     comp_games_df = df[df['week'] < pred_week]
     pred_games_df = df[df['week'] == pred_week]
     train_df = comp_games_df
