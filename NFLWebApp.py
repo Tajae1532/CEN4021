@@ -274,8 +274,10 @@ if menu_selection == "Home":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
 
-    #dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
-    #nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
+    dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
+    nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
+
+    #st.write(nflTeamsResponse)
 
     # Loops Through All of Today's Games
     for game in dailyScoreboardResponse["body"]:
@@ -283,7 +285,7 @@ if menu_selection == "Home":
             with open('styles.css') as f:
                 st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-            homeTeamColumn, gameInfoColumn, awayTeamColumn = st.columns((2, 1, 2))
+            awayTeamColumn, gameInfoColumn, homeTeamColumn = st.columns((1, 2, 1))
 
             # DISPLAYS AWAY TEAM'S LOGO
             with awayTeamColumn:
@@ -292,14 +294,14 @@ if menu_selection == "Home":
             # DISPLAYS GAME'S INFO
             with gameInfoColumn:
                 # Finds Away Team's Name Given Team's Abbreviation
-                for team in nflTeamsResponse:
-                    if dailyScoreboardResponse["body"][game]["away"] == nflTeamsResponse["body"][team]["teamAbv"]:
-                        awayTeam = nflTeamsResponse["body"][team]["teamName"]
+                for team in nflTeamsResponse["body"]:
+                    if dailyScoreboardResponse["body"][game]["away"] == team["teamAbv"]:
+                        awayTeam = team["teamName"]
                         break
                 # Finds Away Team's Name Given Team's Abbreviation
-                for team in nflTeamsResponse:
-                    if dailyScoreboardResponse["body"][game]["home"] == nflTeamsResponse["body"][team]["teamAbv"]:
-                        homeTeam = nflTeamsResponse["body"][team]["teamName"]
+                for team in nflTeamsResponse["body"]:
+                    if dailyScoreboardResponse["body"][game]["home"] == team["teamAbv"]:
+                        homeTeam = team["teamName"]
                         break
                 # Scores
                 awayTeamScore = dailyScoreboardResponse["body"][game]["awayPts"]
