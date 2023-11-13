@@ -273,8 +273,8 @@ if menu_selection == "Home":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
 
-    dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
-    nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
+    #dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
+    #nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
 
     # Loops Through All of Today's Games
     for game in dailyScoreboardResponse["body"]:
@@ -335,7 +335,7 @@ elif menu_selection == "News":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
 
-    newsResponse = requests.get(newsURL, headers=headers, params=querystring).json()
+    #newsResponse = requests.get(newsURL, headers=headers, params=querystring).json()
 
     # Loops Through all the Most Recent News Articles
     for news in newsResponse["body"]:
