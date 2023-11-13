@@ -247,8 +247,8 @@ st.subheader("A Hub for NFL Sports Betters")
 # MENU SETUP
 menu_selection = option_menu(
     menu_title=None,
-    options=["Home", "News", "Schedule", "Prediction Bot"],
-    icons=["house", "book", "calendar-event", "circle"],
+    options=["Home", "News", "Schedule", "Standings", "Prediction Bot"],
+    icons=["house", "book", "calendar-event", "app", "circle"],
     default_index=0,
     orientation="horizontal",
 )
@@ -273,10 +273,8 @@ if menu_selection == "Home":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
 
-    #dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
-    #nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
-
-
+    dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
+    nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
 
     # Loops Through All of Today's Games
     for game in dailyScoreboardResponse["body"]:
@@ -311,9 +309,9 @@ if menu_selection == "Home":
                 st.header(awayTeam + " @ " + homeTeam)
                 st.subheader("(" + awayTeamScore + " - " + homeTeamScore + ")")
                 if gameStatus == "Completed":
-                    if(awayTeamScore > homeTeamScore):
+                    if (awayTeamScore > homeTeamScore):
                         st.subheader("WINNER: " + awayTeam)
-                    elif(homeTeamScore > awayTeamScore):
+                    elif (homeTeamScore > awayTeamScore):
                         st.subheader("WINNER: " + homeTeam)
                     else:
                         st.subheader("DRAW")
@@ -327,9 +325,40 @@ if menu_selection == "Home":
 
 
 elif menu_selection == "News":
-    st.write("Under Construction")
+
+    newsURL = "https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLNews"
+
+    querystring = {"recentNews": "true", "maxItems": "10"}
+
+    headers = {
+        "X-RapidAPI-Key": "078585a2e1msheaec933132a44a7p1c1c95jsn31046989ccf4",
+        "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
+    }
+
+    newsResponse = requests.get(newsURL, headers=headers, params=querystring).json()
+
+    # Loops Through all the Most Recent News Articles
+    for news in newsResponse["body"]:
+        with st.container():
+            with open('styles.css') as f:
+                st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+            imageColumn, headlineColumn = st.columns((1, 2))
+
+            # Prints Article's Image
+            with imageColumn:
+                st.image(news["image"], use_column_width="auto")
+
+            # Prints Article's Title
+            with headlineColumn:
+                st.subheader(news["title"] + "[[...]](" + news["link"] + ")")
+
+
 
 elif menu_selection == "Schedule":
+    st.write("Under Construction")
+
+elif menu_selection == "Standings":
     st.write("Under Construction")
 
 elif menu_selection == "Prediction Bot":
