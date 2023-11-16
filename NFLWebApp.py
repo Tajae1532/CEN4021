@@ -248,8 +248,8 @@ st.subheader("A Hub for NFL Sports Betters")
 # MENU SETUP
 menu_selection = option_menu(
     menu_title=None,
-    options=["Home", "News", "Schedule", "Prediction Bot", "Team Stats"],
-    icons=["house", "book", "calendar-event", "circle"],
+    options=["Home", "News", "Schedule", "Prediction Bot", "Team Stats", "Standings"],
+    icons=["house", "book", "calendar-event", "circle", "circle"],
     default_index=0,
     orientation="horizontal",
 )
@@ -429,5 +429,355 @@ elif menu_selection == "Team Stats":
         hide_index = True,
         use_container_width = True
         )
+elif menu_selection == "Standings":
+    st.header("Standings")
     
-       
+    
+    nflTeamsURL = "https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeams"
+    nflTeamsQuery = {"rosters": "true", "schedules": "true", "topPerformers": "true", "teamStats": "true"}
+    teamHeaders = {
+        "X-RapidAPI-Key": "8917d83bacmshb156cbb3d6abfa3p1c23c0jsnc18a9dcfd536",
+        "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
+    }
+    
+    nflTeams_Response = requests.get(nflTeamsURL, params = nflTeamsQuery, headers = teamHeaders).json()
+    
+    body = nflTeams_Response["body"]
+    
+    AFC_East = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    AFC_West = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    AFC_North = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    AFC_South = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    
+    AFC_East['Logo'] = [
+        teamLogo(body[19]["teamAbv"]),teamLogo(body[3]["teamAbv"]),
+        teamLogo(body[24]["teamAbv"]),teamLogo(body[21]["teamAbv"])
+    ]
+    
+    AFC_East['Name'] = [
+        body[19]["teamCity"] + " " + body[19]["teamName"],
+        body[3]["teamCity"] + " " + body[3]["teamName"],
+        body[24]["teamCity"] + " " + body[24]["teamName"],
+        body[21]["teamCity"] + " " + body[21]["teamName"]
+    ]
+    
+    AFC_East['Wins'] = [
+        body[19]["wins"], body[3]["wins"], body[24]["wins"], body[21]["wins"]
+    ]
+    
+    AFC_East['Losses'] = [
+        body[19]["loss"], body[3]["loss"], body[24]["loss"], body[21]["loss"]
+    ]
+    
+    AFC_East['Ties'] = [
+        body[19]["tie"], body[3]["tie"], body[24]["tie"], body[21]["tie"]
+    ]
+    
+    AFC_West['Logo'] = [
+        teamLogo(body[15]["teamAbv"]), teamLogo(body[16]["teamAbv"]),
+        teamLogo(body[17]["teamAbv"]), teamLogo(body[9]["teamAbv"])
+    ]
+    
+    AFC_West['Name'] = [
+        body[15]["teamCity"] + " " + body[15]["teamName"],
+        body[16]["teamCity"] + " " + body[16]["teamName"],
+        body[17]["teamCity"] + " " + body[17]["teamName"],
+        body[9]["teamCity"] + " " + body[9]["teamName"]
+    ]
+    
+    AFC_West['Wins'] = [
+        body[15]["wins"], body[16]["wins"], body[17]["wins"], body[9]["wins"]
+    ]
+    
+    AFC_West['Losses'] = [
+        body[15]["loss"], body[16]["loss"], body[17]["loss"], body[9]["loss"]
+    ]
+    
+    AFC_West['Ties'] = [
+        body[15]["tie"], body[16]["tie"], body[17]["tie"], body[9]["tie"]
+    ]
+    
+    AFC_North['Logo'] = [
+        teamLogo(body[2]["teamAbv"]), teamLogo(body[25]["teamAbv"]),
+        teamLogo(body[7]["teamAbv"]), teamLogo(body[6]["teamAbv"])
+    ]
+    
+    AFC_North['Name'] = [
+        body[2]["teamCity"] + " " + body[2]["teamName"],
+        body[25]["teamCity"] + " " + body[25]["teamName"],
+        body[7]["teamCity"] + " " + body[7]["teamName"],
+        body[6]["teamCity"] + " " + body[6]["teamName"]
+    ]
+    
+    AFC_North['Wins'] = [
+        body[2]["wins"], body[25]["wins"], body[7]["wins"], body[6]["wins"]
+    ]
+    
+    AFC_North['Losses'] = [
+        body[2]["loss"], body[25]["loss"], body[7]["loss"], body[6]["loss"]
+    ]
+    
+    AFC_North['Ties'] = [
+        body[2]["tie"], body[25]["tie"], body[7]["tie"], body[6]["tie"]
+    ]
+     
+    AFC_South['Logo'] = [
+        teamLogo(body[14]["teamAbv"]),teamLogo(body[12]["teamAbv"]),
+        teamLogo(body[13]["teamAbv"]),teamLogo(body[30]["teamAbv"])
+    ]
+    
+    AFC_South['Name'] = [
+        body[14]["teamCity"] + " " + body[14]["teamName"],
+        body[12]["teamCity"] + " " + body[12]["teamName"],
+        body[13]["teamCity"] + " " + body[13]["teamName"],
+        body[30]["teamCity"] + " " + body[30]["teamName"]
+    ]
+    
+    AFC_South['Wins'] = [
+        body[14]["wins"], body[12]["wins"], body[13]["wins"], body[30]["wins"]
+    ]
+    
+    AFC_South['Losses'] = [
+        body[14]["loss"], body[12]["loss"], body[13]["loss"], body[30]["loss"]
+    ]
+    
+    AFC_South['Ties'] = [
+        body[14]["tie"], body[12]["tie"], body[13]["tie"], body[30]["tie"]
+    ]
+    
+    NFC_East = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    NFC_West = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    NFC_North = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    NFC_South = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
+    
+    NFC_East['Logo'] = [
+        teamLogo(body[26]["teamAbv"]),teamLogo(body[8]["teamAbv"]),
+        teamLogo(body[31]["teamAbv"]),teamLogo(body[23]["teamAbv"])
+    ]
+    
+    NFC_East['Name'] = [
+        body[26]["teamCity"] + " " + body[26]["teamName"],
+        body[8]["teamCity"] + " " + body[8]["teamName"],
+        body[31]["teamCity"] + " " + body[31]["teamName"],
+        body[23]["teamCity"] + " " + body[23]["teamName"]
+    ]
+    
+    NFC_East['Wins'] = [
+        body[26]["wins"], body[8]["wins"], body[31]["wins"], body[23]["wins"]
+    ]
+    
+    NFC_East['Losses'] = [
+        body[26]["loss"], body[8]["loss"], body[31]["loss"], body[23]["loss"]
+    ]
+    
+    NFC_East['Ties'] = [
+        body[26]["tie"], body[8]["tie"], body[31]["tie"], body[23]["tie"]
+    ]
+    
+    NFC_West['Logo'] = [
+        teamLogo(body[27]["teamAbv"]), teamLogo(body[28]["teamAbv"]),
+        teamLogo(body[18]["teamAbv"]), teamLogo(body[0]["teamAbv"])
+    ]
+    
+    NFC_West['Name'] = [
+        body[27]["teamCity"] + " " + body[27]["teamName"],
+        body[28]["teamCity"] + " " + body[28]["teamName"],
+        body[18]["teamCity"] + " " + body[18]["teamName"],
+        body[0]["teamCity"] + " " + body[0]["teamName"]
+    ]
+    
+    NFC_West['Wins'] = [
+        body[27]["wins"], body[28]["wins"], body[18]["wins"], body[0]["wins"]
+    ]
+    
+    NFC_West['Losses'] = [
+        body[27]["loss"], body[28]["loss"], body[18]["loss"], body[0]["loss"]
+    ]
+    
+    NFC_West['Ties'] = [
+        body[27]["tie"], body[28]["tie"], body[18]["tie"], body[0]["tie"]
+    ]
+    
+    NFC_North['Logo'] = [
+        teamLogo(body[10]["teamAbv"]), teamLogo(body[20]["teamAbv"]),
+        teamLogo(body[11]["teamAbv"]), teamLogo(body[5]["teamAbv"])
+    ]
+    
+    NFC_North['Name'] = [
+        body[10]["teamCity"] + " " + body[10]["teamName"],
+        body[20]["teamCity"] + " " + body[20]["teamName"],
+        body[11]["teamCity"] + " " + body[11]["teamName"],
+        body[5]["teamCity"] + " " + body[5]["teamName"]
+    ]
+    
+    NFC_North['Wins'] = [
+        body[10]["wins"], body[20]["wins"], body[11]["wins"], body[5]["wins"]
+    ]
+    
+    NFC_North['Losses'] = [
+        body[10]["loss"], body[20]["loss"], body[11]["loss"], body[5]["loss"]
+    ]
+    
+    NFC_North['Ties'] = [
+        body[10]["tie"], body[20]["tie"], body[11]["tie"], body[5]["tie"]
+    ]
+     
+    NFC_South['Logo'] = [
+        teamLogo(body[22]["teamAbv"]),teamLogo(body[29]["teamAbv"]),
+        teamLogo(body[1]["teamAbv"]),teamLogo(body[4]["teamAbv"])
+    ]
+    
+    NFC_South['Name'] = [
+        body[22]["teamCity"] + " " + body[22]["teamName"],
+        body[29]["teamCity"] + " " + body[29]["teamName"],
+        body[1]["teamCity"] + " " + body[1]["teamName"],
+        body[4]["teamCity"] + " " + body[4]["teamName"]
+    ]
+    
+    NFC_South['Wins'] = [
+        body[22]["wins"], body[29]["wins"], body[1]["wins"], body[4]["wins"]
+    ]
+    
+    NFC_South['Losses'] = [
+        body[22]["loss"], body[29]["loss"], body[1]["loss"], body[4]["loss"]
+    ]
+    
+    NFC_South['Ties'] = [
+        body[22]["tie"], body[29]["tie"], body[1]["tie"], body[4]["tie"]
+    ]
+    
+    AFC_East.sort_values("Wins")
+    AFC_West.sort_values("Wins")
+    AFC_North.sort_values("Wins")
+    AFC_South.sort_values("Wins")
+    NFC_East.sort_values("Wins")
+    NFC_West.sort_values("Wins")
+    NFC_North.sort_values("Wins")
+    NFC_South.sort_values("Wins")
+    
+    st.subheader("AFC EAST")
+    
+    st.dataframe(AFC_East, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("AFC WEST")
+    
+    st.dataframe(AFC_West, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("AFC NORTH")
+    
+    st.dataframe(AFC_North, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("AFC SOUTH")
+    
+    st.dataframe(AFC_South, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("NFC_EAST")
+    
+    st.dataframe(NFC_East, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("NFC WEST")
+    
+    st.dataframe(NFC_West, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("NFC NORTH")
+    
+    st.dataframe(NFC_North, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+                
+            },
+            hide_index = True
+            )
+    
+    st.subheader("NFC SOUTH")
+    
+    st.dataframe(NFC_South, 
+            column_config ={
+                "Logo": st.column_config.ImageColumn(
+                    "Logo", help= "Team Logo"
+                ),
+            "Name": st.column_config.TextColumn("Name"),
+            "Wins": st.column_config.NumberColumn("Wins"),
+            "Losses": st.column_config.NumberColumn("Losses"),
+            "Ties": st.column_config.NumberColumn("Ties"),
+            },
+            hide_index = True
+            )
