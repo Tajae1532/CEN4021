@@ -3,6 +3,8 @@ from streamlit_option_menu import option_menu
 import requests
 from datetime import date
 
+from cairo import displaySchedule
+
 from sportsipy.nfl.boxscore import Boxscores, Boxscore
 import pandas as pd
 import numpy as np
@@ -329,7 +331,7 @@ elif menu_selection == "News":
     st.write("Under Construction")
 
 elif menu_selection == "Schedule":
-    st.write("Under Construction")
+    displaySchedule()
 
 elif menu_selection == "Prediction Bot":
     st.header("NFL Game Prediction")
