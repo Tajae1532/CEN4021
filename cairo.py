@@ -3,6 +3,7 @@ import datetime
 from ScheduleRequest import getSchedule
 import streamlit
 from convert import convertDate
+from DisplayNameLogoSchedule import displayLogoSubheader
 
 def displaySchedule():
     # week selection
@@ -21,7 +22,7 @@ def displaySchedule():
     # sending request to rapid api for schedule
     response = getSchedule(weekOption, "reg", yearOption)
 
-    # extract info
+    # extract info from response
     games_info = []
 
     for game in response['body']:
@@ -45,8 +46,9 @@ def displaySchedule():
 
         games_info.append(game_info)
 
+    #display each teams info in a nice format
     for game in games_info:
-        streamlit.subheader(game_info['gameID'])
+        displayLogoSubheader(game_info['home'], game_info['away'])
         streamlit.write(f"Date: {convertDate(game_info['gameDate'])}")
         streamlit.write(f"Time: {game_info['gameTime']}m")
         streamlit.write(f"Status: {game_info['gameStatus']}")
