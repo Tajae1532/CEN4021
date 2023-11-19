@@ -18,6 +18,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
+from cairo.main import displaySchedule
+
 pd.set_option('display.max_columns', None)
 
 
@@ -356,8 +358,9 @@ elif menu_selection == "News":
 
 
 
+#Schedule
 elif menu_selection == "Schedule":
-    st.write("Under Construction")
+    displaySchedule()
 
 elif menu_selection == "Standings":
     st.write("Under Construction")
