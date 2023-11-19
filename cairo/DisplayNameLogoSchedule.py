@@ -5,7 +5,7 @@ from randy import teamLogo
 #display team names and logos for schedule
 def displayLogoSubheader(home, away):
     # made extra columns to help with sizing logo images
-    col1, col2, col3, col4, col5 = streamlit.columns(5, gap='small')
+    col1, col2, col3, col4, col5, col6, col7= streamlit.columns(7, gap='small')
 
     # Display team logos in each column
     with col1:

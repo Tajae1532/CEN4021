@@ -1,12 +1,21 @@
 import streamlit
 import datetime
+from cairo.ScheduleRequest import getDailySchedule, getWeeklySchedule
+
 
 #allows user to choose between daily and weekly schedule then returns a JSON response with the data
 class ScheduleOptions:
 
-    #requests the daily schedule. datetime.date.today() doesnt work for some reason???
+    # requests the daily schedule
     def daily(self):
-        date = streamlit.date_input("Choose a date", datetime.date.today())
+        # date selection and formatting
+        date = streamlit.date_input(label="Choose a date")
+        gameDate = f"{date.year}{date.month}{date.day}"
+
+        # sending request to rapid api for schedule
+        response = getDailySchedule(gameDate)
+
+        return response
 
 
     #requests the weekly schedule
@@ -29,4 +38,4 @@ class ScheduleOptions:
         streamlit.write('You selected week:', weekOption, 'of the ', yearOption, " season.")
 
         # sending request to rapid api for schedule
-        # return getSchedule(weekOption, "reg", yearOption)
+        return getWeeklySchedule(weekOption, "reg", yearOption)
