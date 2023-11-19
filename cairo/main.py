@@ -8,7 +8,7 @@ def displaySchedule():
     scheduleOptions = ScheduleOptions()
 
     # selection for daily or weekly schedule
-    dayOption = streamlit.toggle(
+    dayOption = streamlit.checkbox(
         "Daily Schedule"
     )
 

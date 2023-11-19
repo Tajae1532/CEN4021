@@ -4,7 +4,7 @@ import datetime
 #allows user to choose between daily and weekly schedule then returns a JSON response with the data
 class ScheduleOptions:
 
-    #requests the daily schedule
+    #requests the daily schedule. datetime.date.today() doesnt work for some reason???
     def daily(self):
         date = streamlit.date_input("Choose a date", datetime.date.today())
 
