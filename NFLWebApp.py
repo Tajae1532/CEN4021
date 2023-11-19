@@ -3,7 +3,7 @@ from streamlit_option_menu import option_menu
 import requests
 from datetime import date
 
-from cairo import displaySchedule
+from cairo.main import displaySchedule
 
 from sportsipy.nfl.boxscore import Boxscores, Boxscore
 import pandas as pd
@@ -19,6 +19,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
+
 
 pd.set_option('display.max_columns', None)
 

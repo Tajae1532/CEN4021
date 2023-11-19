@@ -1,26 +1,10 @@
-import datetime
-
-from ScheduleRequest import getSchedule
 import streamlit
-from convert import convertDate
-from DisplayNameLogoSchedule import displayLogoSubheader
+from cairo.DisplayNameLogoSchedule import displayLogoSubheader
+from cairo.convertGameDate import convertDate
 
-def displaySchedule():
-    # week selection
-    weekOption = streamlit.selectbox(
-        "Select a week you would like to see",
-        ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'),
-        index=None,
-        placeholder="Select week...",
-    )
 
-    # year selection
-    yearOption = streamlit.number_input("Insert a year:", step=1, min_value=1989, max_value=datetime.MAXYEAR)
-
-    streamlit.write('You selected week:', weekOption, 'of the ', yearOption, " season.")
-
-    # sending request to rapid api for schedule
-    response = getSchedule(weekOption, "reg", yearOption)
+# extract and display info from response
+def extractAndDisplayInfo(response):
 
     # extract info from response
     games_info = []
@@ -46,7 +30,7 @@ def displaySchedule():
 
         games_info.append(game_info)
 
-    #display each teams info in a nice format
+    # display each teams info in a nice format
     for game in games_info:
         displayLogoSubheader(game_info['home'], game_info['away'])
         streamlit.write(f"Date: {convertDate(game_info['gameDate'])}")

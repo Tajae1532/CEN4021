@@ -3,6 +3,7 @@ class Date:
     day = 0
     year = 0
 
+#converts gameDate from JSON response into MM/DD/YYYY
 def convertDate(date):
     gameDate = Date()
     gameDate.year = date[0:4]

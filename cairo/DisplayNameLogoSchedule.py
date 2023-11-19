@@ -1,5 +1,7 @@
 import streamlit
-from NFLWebApp import teamLogo
+
+from randy import teamLogo
+
 
 #display team names and logos for schedule
 def displayLogoSubheader(home, away):
