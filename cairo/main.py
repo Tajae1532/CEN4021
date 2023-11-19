@@ -20,5 +20,5 @@ def displaySchedule():
     else:
         response = scheduleOptions.weekly()
 
-    # extract info
-    games_info = extractAndDisplayInfo(response)
+    # extract and display info
+    extractAndDisplayInfo(response)

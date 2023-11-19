@@ -1,5 +1,4 @@
 import streamlit
-
 from randy import teamLogo
 
 
@@ -25,6 +24,3 @@ def displayLogoSubheader(home, away):
 
     # display formatted team names
     streamlit.subheader(formatted_text)
-
-
-

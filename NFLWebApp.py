@@ -331,6 +331,7 @@ if menu_selection == "Home":
 elif menu_selection == "News":
     st.write("Under Construction")
 
+#Schedule
 elif menu_selection == "Schedule":
     displaySchedule()
 
