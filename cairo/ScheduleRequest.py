@@ -23,7 +23,7 @@ def getDailySchedule(gameDate):
     querystring = {"gameDate": {gameDate}}
 
     headers = {
-        "X-RapidAPI-Key": "PUT SOMETHING HERE LATER DONT FORGET",,
+        "X-RapidAPI-Key": "PUT SOMETHING HERE LATER DONT FORGET",
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
 
