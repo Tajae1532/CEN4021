@@ -19,8 +19,12 @@ class ScheduleOptions:
             placeholder="Select week...",
         )
 
-        # year selection
-        yearOption = streamlit.number_input("Insert a year:", step=1, min_value=1989, max_value=datetime.MAXYEAR)
+        # year selection. placeholder doesn't work for some reason?
+        yearOption = streamlit.number_input("Insert a year:",
+                                            step=1,
+                                            min_value=1989,
+                                            max_value=datetime.date.today().year,
+                                            placeholder=datetime.date.today().year.__str__())
 
         streamlit.write('You selected week:', weekOption, 'of the ', yearOption, " season.")
 
