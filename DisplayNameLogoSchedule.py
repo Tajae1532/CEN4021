@@ -15,11 +15,11 @@ def displayLogoSubheader(home, away):
 
     # formatting team names under logo images
     formatted_text = "&nbsp;&nbsp;" \
-                     f"{home}" \
+                     f"{away}" \
                      f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" \
                      "@" \
                      "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" \
-                     f"{away}"
+                     f"{home}"
 
     # display formatted team names
     streamlit.subheader(formatted_text)

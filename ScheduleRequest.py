@@ -1,6 +1,8 @@
 import requests
 
+#sending a request to the API for the schedule of the chosen week
 def getSchedule(week, sType, sYear):
+    #API url
     url = "https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLGamesForWeek"
 
     querystring = {"week": week, "seasonType": sType, "season": sYear}
