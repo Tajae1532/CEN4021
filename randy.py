@@ -18,7 +18,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
-from cairo.main import displaySchedule
+#from cairo.main import displaySchedule
 
 pd.set_option('display.max_columns', None)
 
@@ -249,8 +249,8 @@ st.subheader("A Hub for NFL Sports Betters")
 # MENU SETUP
 menu_selection = option_menu(
     menu_title=None,
-    options=["Home", "News", "Schedule", "Team Stats", "Standings", "Prediction Bot"],
-    icons=["house", "book", "calendar-event", "triangle" ,"app", "circle"],
+    options=["Home", "News", "Schedule", "Team Stats", "Standings", "Predictions"],
+    icons=["house", "book", "calendar-event", "triangle", "app", "circle"],
     default_index=0,
     orientation="horizontal",
 )
@@ -275,8 +275,8 @@ if menu_selection == "Home":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
 
-    #dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
-    #nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
+    dailyScoreboardResponse = requests.get(dailyScoreboardURL, headers=todaysGamesHeaders, params=todaysGamesQuery).json()
+    nflTeamsResponse = requests.get(nflTeamsURL, headers=teamHeaders, params=nflTeamsQuery).json()
 
     # Loops Through All of Today's Games
     for game in dailyScoreboardResponse["body"]:
@@ -325,7 +325,7 @@ if menu_selection == "Home":
                 st.image(teamLogo(dailyScoreboardResponse["body"][game]["home"]), use_column_width="auto")
 
 
-
+# NEWS
 elif menu_selection == "News":
 
     newsURL = "https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLNews"
@@ -338,7 +338,7 @@ elif menu_selection == "News":
     }
 
 
-    #newsResponse = requests.get(newsURL, headers=headers, params=querystring).json()
+    newsResponse = requests.get(newsURL, headers=headers, params=querystring).json()
 
     # Loops Through all the Most Recent News Articles
     for news in newsResponse["body"]:
@@ -357,11 +357,12 @@ elif menu_selection == "News":
                 st.subheader(news["title"] + "[[...]](" + news["link"] + ")")
 
 
-
-#Schedule
+# SCHEDULE
 elif menu_selection == "Schedule":
-    displaySchedule()
-    
+    #displaySchedule()
+    st.write("under construction")
+
+# STATS
 elif menu_selection == "Team Stats":
     st.header("Teams Stats")
     
@@ -423,6 +424,8 @@ elif menu_selection == "Team Stats":
         hide_index = True,
         use_container_width = True
         )
+
+# STANDINGS
 elif menu_selection == "Standings":
     st.header("Standings")
     
@@ -795,7 +798,8 @@ elif menu_selection == "Standings":
             hide_index = True
             )    
 
-elif menu_selection == "Prediction Bot":
+# PREDICTIONS
+elif menu_selection == "Predictions":
     st.header("NFL Game Prediction")
 
     with st.container():
@@ -815,19 +819,19 @@ elif menu_selection == "Prediction Bot":
     if method == "Logistic Regression":
         # Run your logistic regression code and display the results
         y_pred_unscaled, y_pred_scaled = logistic_regression_predict(df, X_test, pred_week)
-        st.write("Logistic Regression - Unscaled\n")
+        st.subheader("Logistic Regression - Unscaled\n")
         display_results(y_pred_unscaled, test_df)
-        st.write("\nLogistic Regression - Scaled\n")
+        st.subheader("\nLogistic Regression - Scaled\n")
         display_results(y_pred_scaled, test_df)
 
     elif method == "Neural Network":
         # Run your neural network code and display the results
         y_pred = neural_network_predict(df, X_test, pred_week)
-        st.write("Neural Network Predictions\n")
+        st.subheader("Neural Network Predictions\n")
         display_results(y_pred, test_df)
 
     elif method == "Random Forest":
         # Run your random forest code and display the results
         y_pred = random_forest_predict(df, X_test, pred_week)
-        st.write("Random Forest Predictions\n")
+        st.subheader("Random Forest Predictions\n")
         display_results(y_pred, test_df)

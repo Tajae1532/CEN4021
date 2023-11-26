@@ -1,9 +1,15 @@
-div[data-testid="stVerticalBlock"] div[style*="flex-direction: column;"] div[data-testid="stVerticalBlock"]{
+div.st-emotion-cache-ocqkz7 {
     background-color: 	rgba(38, 39, 48, 0.5);
     text-align: center;
     margin-bottom: 0.5rem;
     padding-left: 0.25rem;
     border-radius: 1rem;
-
 }
 
+div.st-emotion-cache-1ab9dzl{
+    background-color: 	rgba(38, 39, 48, 0.5);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+    border-radius: 1rem;
+}
