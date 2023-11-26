@@ -432,7 +432,7 @@ elif menu_selection == "Team Stats":
 elif menu_selection == "Standings":
     st.header("Standings")
     
-    
+    # Requesting NFL Data 
     nflTeamsURL = "https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeams"
     nflTeamsQuery = {"rosters": "true", "schedules": "true", "topPerformers": "true", "teamStats": "true"}
     teamHeaders = {
@@ -440,20 +440,27 @@ elif menu_selection == "Standings":
         "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
     }
     
+    
     nflTeams_Response = requests.get(nflTeamsURL, params = nflTeamsQuery, headers = teamHeaders).json()
     
+    # Creating a variable to shorten the name length
     body = nflTeams_Response["body"]
     
+    # Creating the Dataframes for American Football Conference Teams
     AFC_East = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     AFC_West = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     AFC_North = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     AFC_South = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     
+    
+    #Filling in all the data for the AFC Teams based on division
+    #Logos
     AFC_East['Logo'] = [
         teamLogo(body[19]["teamAbv"]),teamLogo(body[3]["teamAbv"]),
         teamLogo(body[24]["teamAbv"]),teamLogo(body[21]["teamAbv"])
     ]
     
+    #Names
     AFC_East['Name'] = [
         body[19]["teamCity"] + " " + body[19]["teamName"],
         body[3]["teamCity"] + " " + body[3]["teamName"],
@@ -461,14 +468,17 @@ elif menu_selection == "Standings":
         body[21]["teamCity"] + " " + body[21]["teamName"]
     ]
     
+    #Wins
     AFC_East['Wins'] = [
         body[19]["wins"], body[3]["wins"], body[24]["wins"], body[21]["wins"]
     ]
     
+    #Losses
     AFC_East['Losses'] = [
         body[19]["loss"], body[3]["loss"], body[24]["loss"], body[21]["loss"]
     ]
     
+    #Ties
     AFC_East['Ties'] = [
         body[19]["tie"], body[3]["tie"], body[24]["tie"], body[21]["tie"]
     ]
@@ -545,16 +555,20 @@ elif menu_selection == "Standings":
         body[14]["tie"], body[12]["tie"], body[13]["tie"], body[30]["tie"]
     ]
     
+    #Creating Dataframes for the National Football Conference
     NFC_East = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     NFC_West = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     NFC_North = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     NFC_South = pd.DataFrame(columns= ['Logo', 'Name','Wins','Losses', 'Ties'])
     
+    #Filling out the data for the NFC teams
+    #Logo
     NFC_East['Logo'] = [
         teamLogo(body[26]["teamAbv"]),teamLogo(body[8]["teamAbv"]),
         teamLogo(body[31]["teamAbv"]),teamLogo(body[23]["teamAbv"])
     ]
     
+    #Name
     NFC_East['Name'] = [
         body[26]["teamCity"] + " " + body[26]["teamName"],
         body[8]["teamCity"] + " " + body[8]["teamName"],
@@ -562,14 +576,17 @@ elif menu_selection == "Standings":
         body[23]["teamCity"] + " " + body[23]["teamName"]
     ]
     
+    #Wins
     NFC_East['Wins'] = [
         body[26]["wins"], body[8]["wins"], body[31]["wins"], body[23]["wins"]
     ]
     
+    #Losses
     NFC_East['Losses'] = [
         body[26]["loss"], body[8]["loss"], body[31]["loss"], body[23]["loss"]
     ]
     
+    #Ties
     NFC_East['Ties'] = [
         body[26]["tie"], body[8]["tie"], body[31]["tie"], body[23]["tie"]
     ]
@@ -646,6 +663,7 @@ elif menu_selection == "Standings":
         body[22]["tie"], body[29]["tie"], body[1]["tie"], body[4]["tie"]
     ]
     
+    #Sorting the Dataframes by the number of wins each teams have
     AFC_East.sort_values("Wins")
     AFC_West.sort_values("Wins")
     AFC_North.sort_values("Wins")
@@ -657,6 +675,7 @@ elif menu_selection == "Standings":
     
     st.subheader("AFC EAST")
     
+    #Converting the pandas dataframe into a streamlit dataframe for presentation
     st.dataframe(AFC_East, 
             column_config ={
                 "Logo": st.column_config.ImageColumn(
