@@ -250,7 +250,7 @@ st.subheader("A Hub for NFL Sports Betters")
 menu_selection = option_menu(
     menu_title=None,
     options=["Home", "News", "Schedule", "Team Stats", "Standings", "Prediction Bot"],
-    icons=["house", "book", "calendar-event", "menu" ,"app", "circle"],
+    icons=["house", "book", "calendar-event", "triangle" ,"app", "circle"],
     default_index=0,
     orientation="horizontal",
 )
