@@ -333,6 +333,8 @@ elif menu_selection == "News":
 elif menu_selection == "Schedule":
     st.write("Under Construction")
 
+
+
 elif menu_selection == "Prediction Bot":
     st.header("NFL Game Prediction")
 
@@ -368,4 +370,5 @@ elif menu_selection == "Prediction Bot":
         # Run your random forest code and display the results
         y_pred = random_forest_predict(df, X_test, pred_week)
         st.write("Random Forest Predictions\n")
-        display_results(y_pred, test_df)
+        display_results(y_pred, test_df) 
+        

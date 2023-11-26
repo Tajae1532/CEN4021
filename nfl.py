@@ -1,7 +1,7 @@
 from sportsipy.nfl.boxscore import Boxscores, Boxscore
 import pandas as pd
 import numpy as np
-
+#Juan's First Comment
 def game_data(game_df,game_stats):
     try:
         away_team_df = game_df[['away_name', 'away_abbr', 'away_score']].rename(columns = {'away_name': 'team_name', 'away_abbr': 'team_abbr', 'away_score': 'score'})
