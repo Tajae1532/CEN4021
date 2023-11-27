@@ -54,28 +54,32 @@ def extractAndDisplayInfo(response):
                 home_logo = teamLogo(game['home'])
                 away_logo = teamLogo(game['away'])
 
-                # Display in multiple columns
-                col1, col2, col3 = streamlit.columns([1, 4, 1])
+                with streamlit.container():
+                    with open('styles.css') as f:
+                        streamlit.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-                # Logo and information in columns
-                with col1:
-                    streamlit.image(away_logo, use_column_width="auto")
+                    # Display in multiple columns
+                    col1, col2, col3 = streamlit.columns([1, 4, 1])
 
-                with col2:
-                    streamlit.header(f"{game['away']} @ {game['home']}")
-                    streamlit.write(f"Date: {convertDate(game['gameDate'])}")
-                    streamlit.write(f"Time: {game['gameTime']}m")
-                    streamlit.write(f"Status: {game['gameStatus']}")
-                    streamlit.write(f"Home Team: {game['home']}")
-                    streamlit.write(f"Away Team: {game['away']}")
-                    streamlit.write(f"ESPN Link: {game['espnLink']}")
-                    streamlit.write(f"CBS Link: {game['cbsLink']}")
+                    # Logo and information in columns
+                    with col1:
+                        streamlit.image(away_logo, use_column_width="auto")
 
-                with col3:
-                    streamlit.image(home_logo, use_column_width="auto")
+                    with col2:
+                        streamlit.header(f"{game['away']} @ {game['home']}")
+                        streamlit.write(f"Date: {convertDate(game['gameDate'])}")
+                        streamlit.write(f"Time: {game['gameTime']}m")
+                        streamlit.write(f"Status: {game['gameStatus']}")
+                        streamlit.write(f"Home Team: {game['home']}")
+                        streamlit.write(f"Away Team: {game['away']}")
+                        streamlit.write(f"ESPN Link: {game['espnLink']}")
+                        streamlit.write(f"CBS Link: {game['cbsLink']}")
 
-                streamlit.write("-----")
+                    with col3:
+                        streamlit.image(home_logo, use_column_width="auto")
 
-                printedGameIDs.append(game['gameID'])
+                    streamlit.write("-----")
+
+                    printedGameIDs.append(game['gameID'])
 
         printedGameIDs.clear()
