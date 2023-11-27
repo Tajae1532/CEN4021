@@ -36,18 +36,18 @@ def extractAndDisplayInfo(response):
         printedGameIDs = []
 
         for game in games_info:
-            if game_info['gameID'] not in printedGameIDs:
-                displayLogoSubheader(game_info['home'], game_info['away'])
-                streamlit.write(f"Date: {convertDate(game_info['gameDate'])}")
-                streamlit.write(f"Time: {game_info['gameTime']}m")
-                streamlit.write(f"Status: {game_info['gameStatus']}")
-                streamlit.write(f"Home Team: {game_info['home']}")
-                streamlit.write(f"Away Team: {game_info['away']}")
-                streamlit.write(f"ESPN Link: {game_info['espnLink']}")
-                streamlit.write(f"CBS Link: {game_info['cbsLink']}")
+            if game['gameID'] not in printedGameIDs:
+                displayLogoSubheader(game['home'], game['away'])
+                streamlit.write(f"Date: {convertDate(game['gameDate'])}")
+                streamlit.write(f"Time: {game['gameTime']}m")
+                streamlit.write(f"Status: {game['gameStatus']}")
+                streamlit.write(f"Home Team: {game['home']}")
+                streamlit.write(f"Away Team: {game['away']}")
+                streamlit.write(f"ESPN Link: {game['espnLink']}")
+                streamlit.write(f"CBS Link: {game['cbsLink']}")
                 streamlit.write("-----")
 
-                printedGameIDs.append(game_info['gameID'])
+                printedGameIDs.append(game['gameID'])
 
-        printedGameIDs = []
+        printedGameIDs.clear()
 

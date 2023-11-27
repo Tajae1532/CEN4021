@@ -33,7 +33,7 @@ class ScheduleOptions:
                                             step=1,
                                             min_value=1989,
                                             max_value=datetime.date.today().year,
-                                            placeholder=datetime.date.today().year.__str__())
+                                            value=datetime.date.today().year)
 
         streamlit.write('You selected week:', weekOption, 'of the ', yearOption, " season.")
 

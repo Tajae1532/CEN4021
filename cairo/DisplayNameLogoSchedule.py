@@ -1,6 +1,7 @@
 import streamlit
 
-from randy import teamLogo
+from cairo.TeamLogo import teamLogo
+
 
 #display team names and logos for schedule
 def displayLogoSubheader(home, away):
